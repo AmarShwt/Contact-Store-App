@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::layout(~{::section})">
+  <head>
+    <title th:text=${title}>User Dashboard </title>
+  </head>
+  <body>
+	<section>
+		<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+			<p class="text-center" th:text="${session.message.content}"></p>
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>		
+		<div class="card mr-3 ml-3">
+			<div class="text-right mr-3  mt-1" > 
+			<a class="btn btn-outline-warning" th:href="@{/user/view-profile}">Back</a>
+		</div>
+			<div class="card-body">
+				<div class="container-fluid text-center">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<h3 class="mb-2">Update Your Profile Details</h3>
+							<form
+								action="#"
+								method="post"
+								th:action="@{/user/updateUserDetail-process}"
+								th:object="${user}"
+								enctype="multipart/form-data"
+								class="mt-1"
+								>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-user-alt"></i>
+										</div>
+									</div>
+									<input type="text" class="form-control" name="name" th:value="${user.name}" />
+								</div>
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											@
+										</div>
+									</div>
+									<input type="email" class="form-control" name="email" th:value="${user.email}" />
+								</div>
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-user-alt"></i>
+										</div>
+									</div>
+									<input type="text" readonly class="form-control" name="role" th:value="${user.role}" />
+								</div>
+								
+								<div class="mt-2" style="text-align: left; font-weight: bold;">
+								<span style="text-align: left;">Account Status :</span>
+								</div>
+								<div class="input-group mt-1">
+									<span> </span>
+									<input type="text" readonly class="form-control" name="enabled" th:value="${user.enabled}" />
+								</div>
+								
+								<div class="mt-2" style="text-align: left; font-weight: bold;">
+									<span style="text-align: left;">About You :</span>
+								</div>
+								<div class="mt-2" style="text-align: left; font-weight: bold;">
+									<textarea rows="4" cols="100" name="about" id="" th:text="${user.about}" />
+								</div>
+								
+								<div class="container text-center mt-2">
+									<img style="width: 150px; height: 150px;" class="usr_profile_pic" src="" alt="userProfile" th:src="@{'/img/'+${user.imageUrl}}" />
+								</div>
+								<p class="text-secondary">Choose anothe image if you want to change the profile pic..</p>
+								<div class="customeFile">
+									<input type="file" name="userProfile" />
+								</div>
+								
+								<div class="container tex-center mt-3">
+									<button type="submit" class="btn btn-outline-primary">Save Changes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.1/css/all.min.css" integrity="sha512-ioRJH7yXnyX+7fXTQEKPULWkMn3CqMcapK0NNtCN8q//sW7ZeVFcbMJ9RvX99TwDg6P8rAH2IqUSt2TLab4Xmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</section>
+  </body>
+</html>

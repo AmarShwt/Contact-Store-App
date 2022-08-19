@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::layout(~{::section})">
+  <head>
+    <title th:text=${title}>User Dashboard </title>
+  </head>
+  <body>
+	<section>
+		<div class="card mr-3 ml-3">
+			<div class="card-body">
+				<div class="container text-center">
+					<img src="" style="width: 250px; height: 250px;" class="usr_profile_pic" alt="user_dashboar_pic" th:src="@{'/img/dashboard_logo1.png'}" />
+				
+					<h1 class="mt-1 text-secondary font-italic font-weight-dark"> Store your contact to cloud....</h1>
+					<div>
+						<a th:href="@{/user/add-contact}" class="btn btn-info mt-2">Add Your Contact</a>
+					</div>
+				</div>
+				<h3 class="my-3">Donate US</h3>
+				<input id="payment_feild" type="text" class="form-control" placeholder="Enter amount here.." />
+				<button onclick="paymentStart()" class="btn btn-success mt-2">PAY</button>
+			</div>
+		</div>
+		<script>
+			$(".item").removeClass('active');
+			$("#home-link").addClass('active');
+		</script>
+	</section>
+  </body>
+</html>

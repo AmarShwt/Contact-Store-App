@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlnp:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+  <head>
+	<meta charset="UTF-8" />
+    <title th:text="${title}">Send OTP</title>
+  </head>
+  <body>
+    <section>
+    	<div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <div class="container my-3">
+                        	<!--<div class="alert-success" role="alert">
+                        		<p class="text-center">OTP has been sent to email successfully...Please check !!</p>
+                        	</div>-->
+                        	<h3 class="text-center">Verify OTP</h3>	
+                        	<!--<div th:if="${session.message}" class="alert-danger" role="alert">
+                        		<p th:text="${session.message}"></p>
+                        	</div>-->
+                        	<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+								<p class="text-center" th:text="${session.message.content}"></p>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+                        	<form th:action="@{/verify-otp}" method="post">
+                        		<div class="input-group mt-3">
+                        			<input name="otp" type="number" class="form-control" placeholder="Enter OTP here" />
+                        		</div>
+                        		<p class="text-primary font-weight-light" style="font-size: 12px;"><span style="font-weight: bold;">Note:</span> Check your email for OTP.</p>
+                        		<div class="container text-center mt-1">
+                        			<button class="btn btn-success">Verify</button>
+                        		</div>
+                        	</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+  </body>
+</html>

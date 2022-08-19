@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::layout(~{::section})">
+  <head>
+    <title th:text=${title}>User Profile</title>
+  </head>
+  <body>
+	<section>
+		<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+			<p class="text-center" th:text="${session.message.content}"></p>
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+		<div class="card mr-3 ml-3">
+			<div class="text-right mt-1 mr-2 ml-3" >
+				<a th:href="@{/user/index}" class="btn btn-outline-warning">Back</a> 
+			</div>
+			<div class="card-body">
+				<div class="container text-center">
+					<img style="width: 250px; height: 250px;" class="usr_profile_pic" src="" th:src="@{'/img/'+${user.imageUrl}}" alt="profileImage" />
+					<div class="container text-center mt-2">
+						<h1 th:text="${user.name}"></h1>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">#User ID</th>
+									<th scope="col"><span th:text="${'SCM000'+user.id}"></span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Email</th>
+									<td><span th:text="${user.email}"></span></td>
+								</tr>
+								<tr>
+									<th scope="row">Role</th>
+									<td><span th:text="${user.role}"></span></td>
+								</tr>
+								<tr>
+									<th scope="row">Account Status</th>
+									<td><span th:text="${user.enabled}"></span></td>
+								</tr>
+								<tr>
+									<th scope="row">About You</th>
+									<td><span th:text="${user.about}"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="container text-center">
+						<form 
+							action="#"
+							th:action="@{'/user/user-profile-update/'+${user.id}}"
+							class=""
+							enctype="multipart/form-data"
+							method="post"
+							>
+							<button class="btn btn-outline-primary">Update</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(".item").removeClass('active');
+			$("#profile-link").addClass('active');
+		</script>
+	</section>
+  </body>
+</html>

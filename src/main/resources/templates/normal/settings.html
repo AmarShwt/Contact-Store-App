@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::layout(~{::section})">
+  <head>
+    <title th:text=${title}>User Dashboard </title>
+  </head>
+  <body>
+	<section>
+		<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+			<p th:text="${session.message.content}"></p>
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="text-secondary">Change Password</h3>
+							<form th:action="@{/user/change-password}" method="post">
+								<div class="form-group"> 
+									<input type="password" name="oldPassword" id="oldPassword" class="form-control mt-4" placeholder="Enter your old password here..." />
+								</div>
+								<div class="form-group"> 
+									<input type="password" name="newPassword" id="newPassword" class="form-control mt-4" placeholder="Enter your new password here..." />
+								</div>
+								<div class="container">
+									<button type="submit" class="btn btn-success">Change</button>
+									<button type="reset" class="btn btn-warning">Reset</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<script>
+			$(".item").removeClass('active');
+			$("#settings-link").addClass('active');
+		</script>
+	</section>
+  </body>
+</html>
